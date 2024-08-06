@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Unity WebGL Player | Aiko Star Heroes</title>
+    <script>
+      function sessionStorageSet(key, value) {
+        try {
+          window.sessionStorage.setItem(
+            "__telegram__" + key,
+            JSON.stringify(value)
+          );
+          return true;
+        } catch (e) {}
+        return false;
+      }
+
+      function sessionStorageGet(key) {
+        try {
+          return JSON.parse(
+            window.sessionStorage.getItem("__telegram__" + key)
+          );
+        } catch (e) {}
+        return null;
+      }
+
+      var appTgVersion = "7.0";
+
+      var initParams = sessionStorageGet("initParams");
+      if (initParams) {
+        if (!initParams.tgWebAppVersion) {
+          initParams.tgWebAppVersion = appTgVersion;
+        }
+      } else {
+        initParams = {
+          tgWebAppVersion: appTgVersion,
+        };
+      }
+      sessionStorageSet("initParams", initParams);
+    </script>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  </head>
+  <body style="text-align: center; padding: 0; border: 0; margin: 0;">
+    <canvas id="unity-canvas" width=360 height=590 tabindex="-1" style="width: 360px; height: 590px; background: #CCCCCC"></canvas>
+    <script src="Build/aikostarheroestest.loader.js"></script>
+    <script>
+      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+        // Mobile device style: fill the whole browser client area with the game canvas:
+        var meta = document.createElement('meta');
+        meta.name = 'viewport';
+        meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
+        document.getElementsByTagName('head')[0].appendChild(meta);
+
+        var canvas = document.querySelector("#unity-canvas");
+        canvas.style.width = "100%";
+        canvas.style.height = "100%";
+        canvas.style.position = "fixed";
+
+        document.body.style.textAlign = "left";
+      }
+
+      createUnityInstance(document.querySelector("#unity-canvas"), {
+        dataUrl: "Build/aikostarheroestest.data",
+        frameworkUrl: "Build/aikostarheroestest.framework.js",
+        codeUrl: "Build/aikostarheroestest.wasm",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "Tiny Castle",
+        productName: "Aiko Star Heroes",
+        productVersion: "0.1.0",
+        // matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
+        // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
+      });
+    </script>
+  </body>
+</html>
