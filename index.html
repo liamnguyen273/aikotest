@@ -43,7 +43,7 @@
   </head>
   <body style="text-align: center; padding: 0; border: 0; margin: 0;">
     <canvas id="unity-canvas" width=360 height=590 tabindex="-1" style="width: 360px; height: 590px; background: #CCCCCC"></canvas>
-    <script src="Build/aikostarheroestest.loader.js"></script>
+    <script src="Build/aikotest.loader.js"></script>
     <script>
       if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
         // Mobile device style: fill the whole browser client area with the game canvas:
@@ -61,9 +61,9 @@
       }
 
       createUnityInstance(document.querySelector("#unity-canvas"), {
-        dataUrl: "Build/aikostarheroestest.data",
-        frameworkUrl: "Build/aikostarheroestest.framework.js",
-        codeUrl: "Build/aikostarheroestest.wasm",
+        dataUrl: "Build/aikotest.data",
+        frameworkUrl: "Build/aikotest.framework.js",
+        codeUrl: "Build/aikotest.wasm",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "Tiny Castle",
         productName: "Aiko Star Heroes",
