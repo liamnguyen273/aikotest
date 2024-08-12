@@ -1,46 +1,46 @@
 <!DOCTYPE html>
 <html lang="en-us">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Unity WebGL Player | Aiko Star Heroes</title>
     <script>
-      function sessionStorageSet(key, value) {
-        try {
-          window.sessionStorage.setItem(
-            "__telegram__" + key,
-            JSON.stringify(value)
-          );
-          return true;
-        } catch (e) {}
-        return false;
-      }
-
-      function sessionStorageGet(key) {
-        try {
-          return JSON.parse(
-            window.sessionStorage.getItem("__telegram__" + key)
-          );
-        } catch (e) {}
-        return null;
-      }
-
-      var appTgVersion = "7.0";
-
-      var initParams = sessionStorageGet("initParams");
-      if (initParams) {
-        if (!initParams.tgWebAppVersion) {
-          initParams.tgWebAppVersion = appTgVersion;
+        function sessionStorageSet(key, value) {
+            try {
+                window.sessionStorage.setItem(
+                    "__telegram__" + key,
+                    JSON.stringify(value)
+                );
+                return true;
+            } catch (e) { }
+            return false;
         }
-      } else {
-        initParams = {
-          tgWebAppVersion: appTgVersion,
-        };
-      }
-      sessionStorageSet("initParams", initParams);
+
+        function sessionStorageGet(key) {
+            try {
+                return JSON.parse(
+                    window.sessionStorage.getItem("__telegram__" + key)
+                );
+            } catch (e) { }
+            return null;
+        }
+
+        var appTgVersion = "7.0";
+
+        var initParams = sessionStorageGet("initParams");
+        if (initParams) {
+            if (!initParams.tgWebAppVersion) {
+                initParams.tgWebAppVersion = appTgVersion;
+            }
+        } else {
+            initParams = {
+                tgWebAppVersion: appTgVersion,
+            };
+        }
+        sessionStorageSet("initParams", initParams);
     </script>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-  </head>
+</head>
   <body style="text-align: center; padding: 0; border: 0; margin: 0;">
     <canvas id="unity-canvas" width=360 height=590 tabindex="-1" style="width: 360px; height: 590px; background: #CCCCCC"></canvas>
     <script src="Build/aikotest.loader.js"></script>
